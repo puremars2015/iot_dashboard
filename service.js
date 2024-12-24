@@ -7,7 +7,7 @@ function initSystem() {
         'sensor': Array.from({ length: 30 }, (_, i) => ({
             "temparature": Math.floor(Math.random() * 15) + 15, // Random temperature between 15 and 30
             "humidity": Math.floor(Math.random() * 51) + 30, // Random humidity between 30 and 80
-            "time": `2021-01-${String(i + 1).padStart(2, '0')} 00:00:00`
+            "time": `2024-11-${String(i + 1).padStart(2, '0')} 00:00:00`
         })),
         // 黃燈溫度閥值
         'yellow_light': 25,

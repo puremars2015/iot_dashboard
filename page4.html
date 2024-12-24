@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #1e1e2f, #2d2d4a);
+            color: #fff;
+        }
+        #reader {
+            width: 300px;
+            margin: 20px auto;
+            border: 2px solid #4db6e5;
+            border-radius: 10px;
+            padding: 10px;
+            background: #2d2d4a;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #4db6e5;
+            border-radius: 10px;
+            background: #1e1e2f;
+            color: #4db6e5;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Scanner</h1>
+    <div id="reader"></div>
+    <div id="result">Scan a QR Code to see the result here</div>
+
+    <script>
+        // Initialize the QR code scanner
+        const html5QrCode = new Html5Qrcode("reader");
+        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            // Show the decoded result
+            document.getElementById("result").innerText = `Result: ${decodedText}`;
+            // Stop the scanner after a successful scan
+            html5QrCode.stop();
+        };
+
+        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+        // Start scanning using the camera
+        Html5Qrcode.getCameras().then(devices => {
+            if (devices && devices.length) {
+                const cameraId = devices[0].id;
+                html5QrCode.start(
+                    cameraId,
+                    config,
+                    qrCodeSuccessCallback
+                ).catch(err => {
+                    console.error("Unable to start scanning", err);
+                });
+            } else {
+                document.getElementById("result").innerText = "No camera found.";
+            }
+        }).catch(err => {
+            document.getElementById("result").innerText = "Error accessing camera: " + err;
+        });
+    </script>
+</body>
+</html>

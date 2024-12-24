@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #1e1e2f, #2d2d4a);
+            font-family: Arial, sans-serif;
+        }
+        .login-card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center h-screen">
+    <div class="login-card w-96 p-8">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">產線監控系統</h2>
+        <form id="login-form">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-600 text-sm font-medium mb-2">Username</label>
+                <input type="text" id="username" name="username" class="border border-gray-300 rounded w-full p-2 focus:ring focus:ring-blue-300" placeholder="Enter your username" required>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-600 text-sm font-medium mb-2">Password</label>
+                <input type="password" id="password" name="password" class="border border-gray-300 rounded w-full p-2 focus:ring focus:ring-blue-300" placeholder="Enter your password" required>
+            </div>
+            <button type="button" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded" onclick="login()">Login</button>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="#" class="text-sm text-blue-500 hover:underline">Forgot your password?</a>
+        </div>
+    </div>
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'admin' && password === 'admin') {
+                window.location.href = '/page1.html';
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+    </script>
+</body>
+</html>
